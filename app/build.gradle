@@ -1,0 +1,65 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.github.chudoxl.vegeshop"
+        minSdkVersion 19
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = '1.8'
+        targetCompatibility = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //dagger2
+    def dagVer = '2.21'
+    implementation "com.google.dagger:dagger:$dagVer"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagVer"
+
+    //moxy
+    def moxyVer = '1.5.3'
+    implementation "com.arello-mobile:moxy:${moxyVer}"
+    annotationProcessor "com.arello-mobile:moxy-compiler:${moxyVer}"
+
+    //rxjava2
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha1'
+
+    //room
+    def roomVer = '2.1.0-alpha03'
+    implementation "android.arch.persistence.room:runtime:${roomVer}"
+    implementation "android.arch.persistence.room:rxjava2:${roomVer}"
+    annotationProcessor "android.arch.persistence.room:compiler:${roomVer}"
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}
