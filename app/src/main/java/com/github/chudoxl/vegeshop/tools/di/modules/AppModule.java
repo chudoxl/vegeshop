@@ -5,6 +5,8 @@ import android.content.Context;
 import com.github.chudoxl.vegeshop.tools.db.TheDb;
 import com.github.chudoxl.vegeshop.tools.db.TheDbFiller;
 
+import org.greenrobot.eventbus.EventBus;
+
 import javax.inject.Singleton;
 
 import androidx.room.Room;
@@ -28,9 +30,15 @@ public class AppModule {
 
     @Provides
     @Singleton
-    TheDb providesTheDb(){
+    TheDb providesTheDb(EventBus eventBus){
         return Room.databaseBuilder(appContext.getApplicationContext(), TheDb.class, "vegeshop.db")
-                .addCallback(new TheDbFiller())
+                .addCallback(new TheDbFiller(eventBus))
                 .build();
+    }
+
+    @Provides
+    @Singleton
+    EventBus providesEventBus(){
+        return EventBus.getDefault();
     }
 }

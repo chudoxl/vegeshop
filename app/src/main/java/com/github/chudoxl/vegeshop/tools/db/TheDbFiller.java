@@ -3,7 +3,10 @@ package com.github.chudoxl.vegeshop.tools.db;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.github.chudoxl.vegeshop.tools.eventBus.WareAddedEvent;
 import com.github.chudoxl.vegeshop.wares.Country;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.math.BigDecimal;
 import java.util.concurrent.Executors;
@@ -14,6 +17,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 public class TheDbFiller extends RoomDatabase.Callback {
     private final static String BASE_URL = "https://raw.githubusercontent.com/chudoxl/vegeshop/master/images/";
+    private final EventBus eventBus;
+
+    public TheDbFiller(EventBus eventBus) {
+        this.eventBus = eventBus;
+    }
 
     @Override
     public void onCreate(@NonNull final SupportSQLiteDatabase db) {
@@ -27,6 +35,7 @@ public class TheDbFiller extends RoomDatabase.Callback {
                 insert(db, 5, "Петрушка", "parsley.jpg", Country.RUS, new BigDecimal("5.55"));
                 insert(db, 6, "Свекла", "beet.jpg", Country.RUS, new BigDecimal("6.66"));
                 insert(db, 7, "Укроп", "dill.jpg", Country.RUS, new BigDecimal("7.77"));
+                eventBus.post(new WareAddedEvent());
             }
         });
     }

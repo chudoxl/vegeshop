@@ -8,7 +8,10 @@ import com.github.chudoxl.vegeshop.R;
 import com.github.chudoxl.vegeshop.tools.db.DbBasketItem;
 import com.github.chudoxl.vegeshop.tools.db.DbWare;
 import com.github.chudoxl.vegeshop.tools.db.TheDb;
+import com.github.chudoxl.vegeshop.tools.eventBus.BasketItemAddedEvent;
 import com.github.chudoxl.vegeshop.tools.moxy.BasePresenter;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -31,6 +34,8 @@ public class CalcPresenter extends BasePresenter<ICalcView> {
 
     @Inject
     Context context;
+    @Inject
+    EventBus eventBus;
     @Inject
     TheDb theDb;
 
@@ -115,7 +120,8 @@ public class CalcPresenter extends BasePresenter<ICalcView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<Long>() {
                     @Override
-                    public void onSuccess(Long biId) {
+                    public void onSuccess(Long id) {
+                        eventBus.post(new BasketItemAddedEvent());
                         getViewState().hide();
                     }
 

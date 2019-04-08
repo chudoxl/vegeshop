@@ -15,4 +15,8 @@
     <string name="btn_calc_add">Добавить</string>
     <string name="btn_calc_cancel">Отменить</string>
     <string name="calc_template">%s ₽ / %s КГ</string>
+    <string name="order_num_template">#%d</string>
+    <string name="sum_template">%s ₽</string>
+    <string name="price_template">1 КГ Х %s ₽</string>
+    <string name="calc_template_bi">%s КГ Х %s ₽</string>
 </resources>

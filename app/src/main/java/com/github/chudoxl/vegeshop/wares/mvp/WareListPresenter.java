@@ -5,8 +5,12 @@ import android.util.Log;
 import com.arellomobile.mvp.InjectViewState;
 import com.github.chudoxl.vegeshop.tools.db.DbWare;
 import com.github.chudoxl.vegeshop.tools.db.TheDb;
+import com.github.chudoxl.vegeshop.tools.eventBus.WareAddedEvent;
 import com.github.chudoxl.vegeshop.tools.moxy.BasePresenter;
 import com.github.chudoxl.vegeshop.wares.Country;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
@@ -22,6 +26,8 @@ import io.reactivex.schedulers.Schedulers;
 public class WareListPresenter extends BasePresenter<IWareListView> {
 
     @Inject
+    EventBus eventBus;
+    @Inject
     TheDb theDb;
 
     private final Integer countryCode;
@@ -32,7 +38,17 @@ public class WareListPresenter extends BasePresenter<IWareListView> {
 
     @Override
     protected void onFirstViewAttach() {
+        eventBus.register(this);
         getViewState().showWaresLoading(true);
+        loadWares();
+    }
+
+    @Subscribe
+    public void onWareAdded(WareAddedEvent e){
+        loadWares();
+    }
+
+    private void loadWares(){
         Disposable d = getWares().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(new DisposableSingleObserver<List<DbWare>>() {
@@ -49,6 +65,7 @@ public class WareListPresenter extends BasePresenter<IWareListView> {
                     }
                 });
         disposeOnDestroy(d);
+
     }
 
     private Single<List<DbWare>> getWares(){

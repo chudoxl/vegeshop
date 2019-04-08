@@ -42,7 +42,7 @@
             android:layout_height="match_parent">
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnMakePayment"
+                android:id="@+id/btnMakeOrder"
                 style="@style/Widget.MaterialComponents.Button.Icon"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                 android:text="Итого:"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/btnMakePayment"
+                app:layout_constraintBottom_toTopOf="@id/btnMakeOrder"
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <TextView
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
-                android:text="%s ₽"
+                android:text="@string/sum_template"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -84,14 +84,29 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvBasketItems"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvTotalSumLabel"
+                app:layout_constraintVertical_bias="0"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:scrollbars="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/rvi_basket_item"
+                tools:itemCount="3"/>
+
+
+            <TextView
+                android:id="@+id/tvEmpty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/tvTotalSumLabel"
-                tools:listitem="@layout/rvi_basket_item"/>
+                app:layout_constraintBottom_toTopOf="@id/tvTotalSum"
+                android:text="ТОВАРОВ НЕТ"
+                android:gravity="center"
+                android:visibility="gone"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                android:drawableTop="@drawable/file_document_box_outline"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 
 @Entity(tableName = "orders")
 public class DbOrder {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "num")
     private long num;
 

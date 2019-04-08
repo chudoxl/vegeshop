@@ -13,6 +13,13 @@ public class BasketItem {
     @Relation(parentColumn = "ware_id", entityColumn = "id")
     private List<DbWare> wares;
 
+    public BasketItem(){}
+
+    public BasketItem(DbBasketItem b, DbWare w){
+        this.bi = b;
+        setWare(w);
+    }
+
     public DbBasketItem getBi() {
         return bi;
     }
