@@ -7,6 +7,7 @@
     <color name="textColor">#757575</color>
 
     <color name="whiteFF">#FFFFFF</color>
+    <color name="whiteAA">#AAFFFFFF</color>
 
     <color name="green">#BEE08F</color>
     <color name="orange">#FFD972</color>
