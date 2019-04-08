@@ -1,5 +1,6 @@
 package com.github.chudoxl.vegeshop.tools.di.components;
 
+import com.github.chudoxl.vegeshop.calc.mvp.CalcPresenter;
 import com.github.chudoxl.vegeshop.tools.di.modules.AppModule;
 import com.github.chudoxl.vegeshop.wares.mvp.WareListPresenter;
 
@@ -11,4 +12,5 @@ import dagger.Component;
 @Component(modules = {AppModule.class})
 public interface IAppComponent {
     void inject(WareListPresenter p);
+    void inject(CalcPresenter p);
 }

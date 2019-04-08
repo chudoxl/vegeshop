@@ -12,4 +12,7 @@
     <string name="Ware_image_descr">Ware image</string>
     <string name="nav_header_exit">Выход</string>
     <string name="Wares">Товары</string>
+    <string name="btn_calc_add">Добавить</string>
+    <string name="btn_calc_cancel">Отменить</string>
+    <string name="calc_template">%s ₽ / %s КГ</string>
 </resources>

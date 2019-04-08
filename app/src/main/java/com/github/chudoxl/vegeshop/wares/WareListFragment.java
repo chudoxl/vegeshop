@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.github.chudoxl.vegeshop.R;
+import com.github.chudoxl.vegeshop.calc.CalculationFragment;
 import com.github.chudoxl.vegeshop.tools.db.DbWare;
 import com.github.chudoxl.vegeshop.tools.di.DiHelper;
 import com.github.chudoxl.vegeshop.tools.helpers.IClickListener;
@@ -83,7 +84,7 @@ public class WareListFragment extends MvpAppCompatFragment implements IWareListV
         rvWares.addItemDecoration(vDivider);
         rvWares.setHasFixedSize(true);
         rvWares.setAdapter(new WaresRvAdapter(item -> {
-
+            CalculationFragment.newInstance(item.getId()).show(getChildFragmentManager(), "calcDialog");
         }));
 
 

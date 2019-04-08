@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "bd17279fb1d209fb6c1d4e4d020443ab",
+    "identityHash": "1a11b874dbda6c0f2cd86b7a8bd709b0",
     "entities": [
       {
         "tableName": "wares",
@@ -47,11 +47,65 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "basket",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pos` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `ware_id` INTEGER NOT NULL, `amount` TEXT, FOREIGN KEY(`ware_id`) REFERENCES `wares`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
+        "fields": [
+          {
+            "fieldPath": "pos",
+            "columnName": "pos",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wareId",
+            "columnName": "ware_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "amount",
+            "columnName": "amount",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "pos"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_basket_ware_id",
+            "unique": false,
+            "columnNames": [
+              "ware_id"
+            ],
+            "createSql": "CREATE  INDEX `index_basket_ware_id` ON `${TABLE_NAME}` (`ware_id`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "wares",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "ware_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       }
     ],
+    "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"bd17279fb1d209fb6c1d4e4d020443ab\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"1a11b874dbda6c0f2cd86b7a8bd709b0\")"
     ]
   }
 }

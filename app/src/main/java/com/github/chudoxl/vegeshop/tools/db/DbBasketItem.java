@@ -5,12 +5,15 @@ import java.math.BigDecimal;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
-@Entity(tableName = "basket", foreignKeys = @ForeignKey(entity = DbWare.class, parentColumns = "id", childColumns = "ware_id"))
+@Entity(tableName = "basket",
+        foreignKeys = @ForeignKey(entity = DbWare.class, parentColumns = "id", childColumns = "ware_id"),
+        indices = {@Index(value = {"ware_id"})})
 public class DbBasketItem {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "pos")
     private long pos;
 
